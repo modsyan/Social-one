@@ -1,18 +1,16 @@
-const express = require('express');
 const morgan = require('morgan');
-
-const userController = require('./controller/userController');
-const app = express();
+const app = require('express').express();
+const UserRouter = require('./routes/userRoute');
 
 // [1] midddlewares
 app.use(morgan('dev'));
-app.use(console.log(`sent at: ${new Date().toISOString}`));
+app.use(console.log('sent at', new Date().toISOString));
 
 // [2] routes
 
-app.route('/api/v1/register/');
-app.route('/api/v1/login/');
-app.route('/api/v1/home/');
-app.route('/api/v1/users/'); // users -> me
+// used middleware as a director from outer vision and route from scope vision
+// app.route('/url-to-dircet', router)
+app.route('/api/v1/users/', UserRouter); // users -> me
+
 
 module.exports = app;
